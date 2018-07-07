@@ -1,0 +1,51 @@
+<div class="masonry-content">
+	<ngx-masonry>
+        <ngxMasonryItem class="masonry-item" *ngFor="let disco of discos">
+        	
+        	<mat-card class="example-card">
+	        	<div class="card-img">
+	        		<img class="music-card-img">
+	        	</div>
+			  <mat-card-header>
+				
+			    <mat-card-title>
+			    	{{disco.nombre_disco | titlecase}}
+			    </mat-card-title>
+			    <mat-card-subtitle>
+			    	{{disco.autor_disco | titlecase}}
+				</mat-card-subtitle>
+			  </mat-card-header>
+			  
+			  <mat-card-content>
+			  	<div class="content">
+			  		<div>
+			  			<strong> Genero : </strong>{{disco.genero_disco | titlecase}} 
+			  		</div>
+			  		<div>
+			  			<strong> Album : </strong>{{disco.album_disco | titlecase}}
+			  		</div>
+			  		<div>
+			  			<strong> Lanzamiento : </strong>{{disco.fecha_lanzamiento_disco | date}}
+			  		</div>
+	
+			  	</div>
+			    
+			  </mat-card-content>
+			  <mat-card-actions>
+			  	<button mat-mini-fab color="primary">
+			    	<mat-icon>find_in_page</mat-icon>
+			    </button>
+			    <button mat-mini-fab color="basic" [routerLink] = "['/update-disco',disco.id_disco]">
+			    	<mat-icon>edit</mat-icon>
+
+			    </button>
+			    <button mat-mini-fab color="warn">
+			    	<mat-icon>delete</mat-icon>
+			    </button>
+			  </mat-card-actions>
+			</mat-card>
+
+	    </ngxMasonryItem>
+	</ngx-masonry>
+
+</div>

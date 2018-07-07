@@ -1,0 +1,38 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title><h2>Login</h2></mat-card-title>
+    <mat-card-subtitle><h4>Iniciar Sesion</h4></mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="form_login" (ngSubmit)="iniciarSesion()">
+      <div class="form-group">
+        <mat-form-field>
+            <input matInput name="email" [formControlName]="'email'" [(ngModel)]="usuario.email" class="form-control" type="text" placeholder="Email" autofocus/>
+            
+            <mat-error>
+            <mat-hint align="center">{{message_error[0].email}}</mat-hint> 
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput name="contraseña" [formControlName]="'contraseña'" [(ngModel)]="usuario.contrasena" type="password" placeholder="Contraseña" [type]="hide ? 'text':'password' "/>
+          
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off':'visibility' }}
+          </mat-icon>
+          <mat-error>
+            <mat-hint align="center">{{message_error[0].contrasena}}</mat-hint>        
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="iniciarSesion()">Iniciar Sesion</button>
+    <button mat-raised-button color="primary" [routerLink]="['/registro']">Registrarse</button>
+  </mat-card-actions>
+</mat-card>

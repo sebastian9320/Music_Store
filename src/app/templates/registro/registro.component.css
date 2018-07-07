@@ -1,0 +1,23 @@
+.example-card {
+	margin-top: 40px !important;
+    max-width: 400px;
+	display:table;
+	margin: 0 auto;
+}
+
+.example-header-image {
+
+  	background-size: cover;
+}
+
+.mat-form-field{
+	width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+	text-align: center;
+	color: rgba(0,0,0,.54);
+}
+.mat-hint{
+	color: red;
+}
