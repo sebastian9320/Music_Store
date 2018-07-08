@@ -10,11 +10,30 @@ import { map } from 'rxjs/operators';
 })
 export class MainNavComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
-    
-  constructor(private breakpointObserver: BreakpointObserver) {}
-  
-  }
+  	public is_login: boolean;
+  	public name_usuario: string;
+	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+	    .pipe(
+	      map(result => result.matches)
+	    );
+	    
+	constructor(private breakpointObserver: BreakpointObserver) {
+		
+		
+	}
+	ngOnInit(){
+		this.validarLogin();
+		
+	}
+	validarLogin(){
+		
+		if(localStorage.getItem("currentUser") != null){
+			this.is_login = true;
+			this.name_usuario = localStorage.getItem("currentUserName");
+		}else{
+			this.is_login = false;
+			this.name_usuario = "Invitado";
+		}
+	}
+	
+}

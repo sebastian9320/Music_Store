@@ -16,6 +16,7 @@ import { Genero } from '../models/genero';
 
 export class CreateDiscoComponent{
 
+	public titulo: string;
  	public disco: Disco;
  	public form_disco: FormGroup;
  	public generos: Genero;
@@ -26,7 +27,9 @@ export class CreateDiscoComponent{
 		private _router: Router,
 		private form_builder: FormBuilder
 	){
+		this.titulo = "crear disco";
 		this.disco = new Disco(0,'','',0,'',new Date(),1);
+		this.createFormDisco();
 		this.message_error = [
 								{
 
@@ -36,7 +39,6 @@ export class CreateDiscoComponent{
 							  	'album' : 'Album no valido'							  
 							  	}
 							 ];
-		this.createFormDisco();
 	}
 
 	ngOnInit(){

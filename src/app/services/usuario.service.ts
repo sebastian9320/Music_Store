@@ -39,11 +39,16 @@ export class UsuarioService{
 	// ****************************************************************************** //
 
 	iniciarSesionUsuario(usuario: Usuario):Observable<any>{
-		
-		return this._http.get(this.url + '/inicio-sesion/'+ usuario.email)
+
+		let json = JSON.stringify(usuario);
+		let params = 'json='+json;
+		let headers_list = new HttpHeaders({
+			'Content-Type' : 'application/x-www-form-urlencoded'
+		});
+		return this._http.post(this.url + '/inicio-sesion',params, {
+			headers: headers_list})
 				.pipe(map(
 					res => {
-						console.log(res);
 						return res;
 					},
 					error => {
@@ -52,6 +57,17 @@ export class UsuarioService{
 				));	
 	}
 	
+	getUsuarioPorId(id: number): Observable<any>{
+		return this._http.get(this.url + '/usuario/'+id)
+				.pipe(map(
+					res => {
+						return res;
+					},
+					error => {
+						console.log(error);	
+					}
+				));	
+	}
 	// ****************************************************************************** //
 	/*
 	updateUsuario(id, usuario: Usuario): Observable<any>{

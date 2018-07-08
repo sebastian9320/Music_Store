@@ -4,15 +4,22 @@
 .ngxMasonry{
 	margin: auto;
 }
+.masonry-item-content{
+	display: table;
+	margin: 0 auto;
+}
 .masonry-content{
+
 	display: table;
 	margin: 0  auto;
 	width: 90%;
 	padding: 15px;
+	margin-top: 65px;
 }
 .card-img{
 	width: 100%;
-	height: 180px;
+	height: 240px;
+	margin-bottom: 10px;
 }
 .mat-card-actions{
 	padding: 10px 10px 10px 15px !important;
@@ -23,13 +30,15 @@
 
 @media screen and (min-width: 760px) {
 	.masonry-item{
-		width: 22%;
+		width: 24%;
 	}
 
 }
 @media screen and (min-width: 240px) and (max-width: 759px){
 	.masonry-item{
-		width: 98%;
-
+		width: 45%;
+	}
+	.card-img{
+		height: 100px;
 	}
 }

@@ -1,0 +1,43 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title><b>Perfil de Usuario</b></mat-card-title>
+    <mat-card-subtitle>Datos Personales</mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="user-content" *ngFor="let datos of usuario">
+      <div class="data-1">
+          <p>
+            <b>Nombre :</b>
+            {{datos.nombre_usuario | titlecase}}
+          </p>
+          <p>
+            <b>Apellidos :</b>
+            {{datos.apellido_usuario | titlecase}}  
+          </p>
+          <p>
+            <b>Numero de Identificacion :</b>
+            {{datos.identificacion_usuario | titlecase}}  
+          </p>
+          <p>
+            <b>Fecha de Nacimiento :</b>
+            {{datos.fecha_nacimiento_usuario | date}}
+          </p>
+          <p>
+            <b>Email :</b>
+            {{datos.email_usuario | titlecase}}
+          </p>
+          
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="basic"><mat-icon>edit</mat-icon> Editar</button>
+  </mat-card-actions>
+</mat-card>
+
+<button mat-button (click)="openSnackBar()" aria-label="Show an example snack-bar">
+  Pizza party
+</button>
+

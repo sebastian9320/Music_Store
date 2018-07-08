@@ -18,7 +18,7 @@ export class DiscosComponent implements OnInit{
 	public title: string;
 	public numbers: Array<number>;
 	public discos: Disco;
-
+	public is_login: boolean;
 	constructor(
 			private _route:Router,
 			private _router:ActivatedRoute,
@@ -30,8 +30,9 @@ export class DiscosComponent implements OnInit{
 
 	}
 	ngOnInit(){
-		console.log(this.title);
+		this.validarLogin();
 		this.getDiscos();
+
 	}
 	/*************************************************************/
 	getDiscos(){
@@ -41,7 +42,7 @@ export class DiscosComponent implements OnInit{
 
 				if(result){
 					this.discos = result.data;			
-					console.log(this.discos);
+					
 				}else{
 					this.discos = result.data;
 				}
@@ -51,6 +52,14 @@ export class DiscosComponent implements OnInit{
 			}
 		);
 
+	}
+
+	validarLogin(){
+		if(localStorage.getItem("currentUser") != null){
+			this.is_login = true;
+		}else{
+			this.is_login = false;
+		}
 	}
 	/**************************************************************/
 	/*openDialogEdit(){

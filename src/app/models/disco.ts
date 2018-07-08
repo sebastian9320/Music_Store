@@ -5,7 +5,7 @@ export class Disco{
 		public autor:string,
 		public genero: number,
 		public album: string,
-		public fecha_lanzamiento: Date,
+		public fecha_lanzamiento: any,
 		public registro_usuario: number
 	){
 		

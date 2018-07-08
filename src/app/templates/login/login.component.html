@@ -17,7 +17,7 @@
         </mat-form-field>
         
         <mat-form-field>
-          <input matInput name="contraseña" [formControlName]="'contraseña'" [(ngModel)]="usuario.contrasena" type="password" placeholder="Contraseña" [type]="hide ? 'text':'password' "/>
+          <input matInput name="contrasena" [formControlName]="'contrasena'" [(ngModel)]="usuario.contrasena" type="password" placeholder="Contrasena" [type]="hide ? 'text':'password' "/>
           
           <mat-icon matSuffix (click)="hide = !hide">
             {{hide ? 'visibility_off':'visibility' }}

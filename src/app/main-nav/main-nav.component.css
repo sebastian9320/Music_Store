@@ -9,3 +9,7 @@
 .mat-nav-list>a{
 	color: rgba(0,0,0,.54);
 }
+.toolbar-nav{
+	position: fixed;
+	box-shadow: 2px 3px 3px 3px #fc030333;
+}

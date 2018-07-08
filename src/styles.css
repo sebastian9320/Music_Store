@@ -9,8 +9,27 @@ body{
 .mat-hint{
 	color: red;
 }
-.music-card-img{
+.card-img{
 	background-image: url('./assets/images/Music-icon.png');
 	background-size: 100%;
 	background-repeat: no-repeat;
+}
+.mat-basic{
+	color: #fff !important;
+	background-color: #f59e08 !important;
+}
+.mat-input-field{
+	margin-bottom: 10px !important;
+}
+.success-snackbar{
+	background-color: #5fba7d !important;
+}
+.mat-snack-bar-container{
+	margin-bottom: 40px !important;
+}
+.mat-simple-snackbar{
+	font-weight: bold;
+}
+.mat-simple-snackbar-action>button{
+	color: #fff;
 }

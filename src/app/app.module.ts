@@ -14,13 +14,18 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
 import { LoginComponent } from './components/login.component';
+import { PerfilComponent } from './components/perfil.component';
+import { LogoutComponent } from './components/logout.component';
 import { ErrorComponent } from './components/error.component';
 import { RegistroComponent } from './components/registro.component';
 import { DiscosComponent } from './components/discos.component';
 import { CreateDiscoComponent } from './components/create_disco.component';
+import { UpdateDiscoComponent } from './components/update_disco.component';
 
-// Importar modulo de rutas con sus respectivos parametros
+// Importar modulo de rutas para nevegacion entre componentes
 import { AppRoutingModule } from './app-routing.module';
+
+import { LoginGuard } from './guards/login.guard';
 
 // Modulo con componentes de angular material 
 import { MaterialModule} from './material.module';
@@ -31,6 +36,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 // Importar modulo httpclient para solicitudes mediante http 
 import { HttpClientModule } from '@angular/common/http';
 
+// decorador ng module
 @NgModule({
 
 
@@ -39,11 +45,14 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     MainNavComponent,
     LoginComponent,
+    PerfilComponent,
     HomeComponent,
     ErrorComponent,
     RegistroComponent,
     DiscosComponent,
-    CreateDiscoComponent 
+    CreateDiscoComponent,
+    UpdateDiscoComponent,
+    LogoutComponent 
   ],
 
   // Importacion de modulos
@@ -72,7 +81,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

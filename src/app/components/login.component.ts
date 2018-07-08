@@ -40,7 +40,7 @@ import { Usuario } from '../models/usuario';
  	}
  	onSubmit(){
  		this.iniciarSesion();
- 		alert('hola');
+ 		
  	}
  	createFormLogin(){
  		this.form_login = this.form_builder.group({
@@ -51,7 +51,7 @@ import { Usuario } from '../models/usuario';
 												Validators.minLength(10)
 												])
 			],	
-			'contraseña' : [ null,Validators.compose([
+			'contrasena' : [ null,Validators.compose([
 												Validators.required, 
 												Validators.minLength(5)
 												])
@@ -62,9 +62,21 @@ import { Usuario } from '../models/usuario';
 
 
  	iniciarSesion(){
+ 		
  		this._usuario_service.iniciarSesionUsuario(this.usuario).subscribe(
  			response => {
- 				console.info(response);
+ 				if((response.status == "success") && (response.code == 200)){
+
+ 					localStorage.setItem('currentUser',response.data.id_usuario);
+ 					localStorage.setItem('currentUserEmail',response.data.email_usuario);				
+ 					localStorage.setItem('currentUserName',response.data.nombre_usuario);
+
+ 					this._router.navigate(['/home']);
+ 				}else{
+ 					
+ 					alert("Error al iniciar sesion");
+ 				}
+ 				
  			},
  			error => {
  				console.info(error);

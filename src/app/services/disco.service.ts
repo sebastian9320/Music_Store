@@ -30,6 +30,18 @@ export class DiscoService{
 				));	
 	}
 
+	getDiscoPorId(id: number): Observable<any>{
+		return this._http.get(this.url + '/disco/'+id)
+				.pipe(map(
+					res => {
+						return res;
+					},
+					error => {
+						console.log(error);	
+					}
+				));	
+	}
+
 
 	getGeneros(): Observable<any>{
 		return this._http.get(this.url + '/generos')
@@ -61,4 +73,25 @@ export class DiscoService{
 				));											
 	}
 	
+
+	updateDisco(id, disco: Disco): Observable<any>{
+		let json = JSON.stringify(disco);
+		let params = 'json='+json;
+		let headers_list = new HttpHeaders({
+			'Content-Type' : 'application/x-www-form-urlencoded'
+		});
+
+		return this._http.put(this.url + '/update-disco/'+id, params, {
+			headers: headers_list})
+				.pipe(map(
+					res => {
+						console.info(res);
+						return res;
+					},
+					error => {
+						console.log(error);	
+					}
+				));	
+	}
+
 }
