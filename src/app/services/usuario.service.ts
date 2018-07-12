@@ -22,8 +22,10 @@ export class UsuarioService{
 	createUsuario(usuario: Usuario):Observable<any>{
 		let json = JSON.stringify(usuario);
 		let params = 'json='+json;
+		let token = this.getToken();
 		let headers_list = new HttpHeaders({
 			'Content-Type' : 'application/x-www-form-urlencoded'
+
 		});
 		return this._http.post(this.url + '/create-usuario', params, {headers: headers_list})
 				.pipe(map(
@@ -58,7 +60,12 @@ export class UsuarioService{
 	}
 	
 	getUsuarioPorId(id: number): Observable<any>{
-		return this._http.get(this.url + '/usuario/'+id)
+		let token = this.getToken();
+		let headers_list = new HttpHeaders({
+			'Authorization' : `Bearer ${token}`
+		})
+		return this._http.get(this.url + '/usuario/'+id,{
+			headers: headers_list})
 				.pipe(map(
 					res => {
 						return res;
@@ -69,20 +76,21 @@ export class UsuarioService{
 				));	
 	}
 	// ****************************************************************************** //
-	/*
-	updateUsuario(id, usuario: Usuario): Observable<any>{
+	
+	updateUsuario(id: number, usuario: Usuario): Observable<any>{
 		let json = JSON.stringify(usuario);
+		console.log(json);
 		let params = 'json='+json;
+		let token = this.getToken();
 		let headers_list = new HttpHeaders({
-			'Content-Type' : 'application/x-www-form-urlencoded'
+			'Content-Type' : 'application/x-www-form-urlencoded',
+			'Authorization' : `Bearer ${token}`
 		});
-		//headers_list.append("Authorization",`Bearer `);
-		
-		return this._http.post(this.url + 'update-usuario/'+id, params, {
+
+		return this._http.put(this.url + '/update-usuario/'+id, params, {
 			headers: headers_list})
 				.pipe(map(
 					res => {
-						console.info(res);
 						return res;
 					},
 					error => {
@@ -90,22 +98,14 @@ export class UsuarioService{
 					}
 				));	
 	}
+
+	getToken(){
+		let usuario = JSON.parse(localStorage.getItem("currentUser"));
+		if(usuario){
+			return usuario.token_auth_usuario;
+		}else{
+			return false;
+		}
+	}
 	
-	*/
-
-	/*
-	deleteusuario(id: number):Observable<any>{
-
-		return this._http.get(this.url+'delete-usuario/'+id)
-								.pipe(map(
-									res => {
-										return res;
-									},
-									error => {
-										console.log(error);	
-									}
-								));	
-								
-	}*/
-
 }

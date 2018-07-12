@@ -1,5 +1,6 @@
 .example-card {
-	margin-top: 40px !important;
+	margin-top: 80px !important;
+	margin-bottom: 20px !important;
     max-width: 400px;
 	display:table;
 	margin: 0 auto;

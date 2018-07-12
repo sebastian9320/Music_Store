@@ -7,23 +7,27 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async)"
     (click)="drawer.toggle()">
-    <mat-toolbar color="warn">
+    <mat-toolbar color="primary">
       
       Menu
     </mat-toolbar>
-    <mat-nav-list>
+   
+    <mat-nav-list *ngIf="is_logged">
       <b><a mat-list-item> Welcome {{name_usuario | titlecase}}</a></b>
       <a mat-list-item [routerLink]="['/home']">Home</a>
-      <a mat-list-item *ngIf="is_login" [routerLink]="['/perfil']">Perfil</a>
-      <a mat-list-item *ngIf="is_login" [routerLink]="['/create-disco']">Publicar Disco</a>
-      <a mat-list-item *ngIf="is_login" [routerLink]="['/view-discos']">Mis Discos</a>
-      <a mat-list-item *ngIf="!is_login" [routerLink]="['/registro']">Registrarse</a>
-      <a mat-list-item *ngIf="!is_login" [routerLink]="['/login']">Login</a>
-      <a mat-list-item *ngIf="is_login" [routerLink]="['/logout']">Cerrar Sesion</a>
+      <a mat-list-item [routerLink]="['/perfil']">Perfil</a>
+      <a mat-list-item [routerLink]="['/create-disco']">Publicar Disco</a>
+      <a mat-list-item (click)="logout()" [routerLink]="['/home']">Cerrar Sesion</a>
+    </mat-nav-list>
+    <mat-nav-list *ngIf="!is_logged">
+      <b><a mat-list-item> Welcome {{name_usuario | titlecase}}</a></b>
+      <a mat-list-item [routerLink]="['/home']">Home</a>
+      <a mat-list-item [routerLink]="['/registro']">Registrarse</a>
+      <a mat-list-item [routerLink]="['/login']">Login</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="toolbar-nav" color="warn">
+    <mat-toolbar class="toolbar-nav" color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -32,7 +36,7 @@
         >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span [routerLink]="['/home']">Music Store</span>
+      <span [routerLink]="['/home']" style="cursor: pointer">Music Store</span>
     </mat-toolbar>
     <ng-content>
     </ng-content>

@@ -1,0 +1,22 @@
+.example-card {
+	
+ 	width: 300px;
+  	display: table;
+  	margin: 0 auto;
+  	margin-top: 80px;	
+}
+
+.example-header-image {
+	display: table;
+	margin: 0 auto;
+	height: 120px;
+	width: 120px;
+    background-image: url('https://image.flaticon.com/icons/svg/178/178137.svg');
+    background-size: 120px;
+}
+.header-card{
+	width: 100% !important;
+}
+.mat-card-actions{
+	padding: 0 0 10px 10px !important;
+}

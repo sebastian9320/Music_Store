@@ -1,15 +1,30 @@
 .example-card {
-	margin-top: 40px !important;
-  max-width: 400px;
-  display:table;
-  margin: 0 auto;
+  	margin-top: 100px !important;
+    max-width: 400px;
+    display:table;
+    margin: 0 auto;
 }
 
 .example-header-image {
+	display: table;
+	margin: 0 auto;
+	height: 100px;
+	width: 100px;
+	background-image: url("https://imageog.flaticon.com/icons/png/512/262/262237.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+}
 
-  background-size: cover;
+.title-card{
+	display: table;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .mat-form-field{
 	width: 100%;
+}
+
+.mat-card-actions{
+	padding: 10px !important;
 }

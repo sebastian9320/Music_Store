@@ -1,0 +1,49 @@
+<mat-card class="example-card" *ngIf="validarDisco(disco)">
+  <mat-card-header>
+    <div class="header-card">
+        <div mat-card-avatar class="example-header-image"></div>
+        <br>
+          
+    </div>
+  </mat-card-header>
+  <mat-card-content >
+    <div class="user-content" >
+      <div class="data-1">
+          <p>
+            <b>Disco # </b>
+            {{disco.id}}
+          </p>
+          <p>
+            <b>Nombre :</b>
+            {{disco.nombre | titlecase }}
+          </p>
+          <p>
+            <b>Autor :</b>
+            {{disco.autor | titlecase }}
+          </p>
+          <p>
+            <b>Genero :</b>
+            {{disco.genero | titlecase }}  
+          </p>
+          <p>
+            <b>Album :</b>
+            {{disco.album | titlecase}}  
+          </p>
+          <p>
+            <b>Fecha de Lanzamiento :</b>
+            {{disco.fecha_lanzamiento | date}}
+          </p>
+          
+          
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [routerLink]="['/home']">
+      <mat-icon>
+      reply
+      </mat-icon>
+      Volver
+    </button>
+  </mat-card-actions>
+</mat-card>

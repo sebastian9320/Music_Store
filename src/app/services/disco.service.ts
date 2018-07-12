@@ -11,24 +11,13 @@ import { GLOBAL } from './global';
 
 export class DiscoService{
 
-	public url = GLOBAL.url;
+	public url: string;
 
 	constructor(private _http: HttpClient){
-
+		this.url = GLOBAL.url
 	}
 
-	getDiscos(): Observable<any>{
-		return this._http.get(this.url + '/discos')
-				.pipe(map(
-					res => {
-						console.log(res);
-						return res;
-					},
-					error => {
-						console.log(error);	
-					}
-				));	
-	}
+	
 
 	getDiscoPorId(id: number): Observable<any>{
 		return this._http.get(this.url + '/disco/'+id)
@@ -39,12 +28,15 @@ export class DiscoService{
 					error => {
 						console.log(error);	
 					}
-				));	
+				));
 	}
 
-
 	getGeneros(): Observable<any>{
-		return this._http.get(this.url + '/generos')
+		let token = this.getToken();
+		let headers_list = new HttpHeaders({
+			'Authorization' : `Bearer ${token}`
+		})	
+		return this._http.get(this.url + '/generos',{headers : headers_list})
 				.pipe(map(
 					res => {
 						return res;
@@ -55,12 +47,31 @@ export class DiscoService{
 				));	
 	}
 
+	searchDisco(field: string): Observable<any>{
+		
+		let json = JSON.stringify(field);
+		let params = 'json='+json;
+		let headers_list = new HttpHeaders({
+			'Content-Type' : 'application/x-www-form-urlencoded'
+		});
+		return this._http.post(this.url + '/search-disco', params, {headers: headers_list})
+				.pipe(map(
+					res => {
+						return res;
+					},
+					error => {
+						console.log(error);	
+					}
+				));
+	}
 
 	createDisco(disco: Disco):Observable<any>{
 		let json = JSON.stringify(disco);
 		let params = 'json='+json;
+		let token = this.getToken();
 		let headers_list = new HttpHeaders({
-			'Content-Type' : 'application/x-www-form-urlencoded'
+			'Content-Type' : 'application/x-www-form-urlencoded',
+			'Authorization' : `Bearer ${token}`
 		});
 		return this._http.post(this.url + '/create-disco', params, {headers: headers_list})
 				.pipe(map(
@@ -73,25 +84,64 @@ export class DiscoService{
 				));											
 	}
 	
-
-	updateDisco(id, disco: Disco): Observable<any>{
-		let json = JSON.stringify(disco);
-		let params = 'json='+json;
-		let headers_list = new HttpHeaders({
-			'Content-Type' : 'application/x-www-form-urlencoded'
-		});
-
-		return this._http.put(this.url + '/update-disco/'+id, params, {
-			headers: headers_list})
+	getDiscos(): Observable<any>{
+		return this._http.get(this.url + '/discos')
 				.pipe(map(
 					res => {
-						console.info(res);
+						
 						return res;
 					},
 					error => {
 						console.log(error);	
 					}
 				));	
+	}
+
+	updateDisco(id: number, disco: Disco): Observable<any>{
+		let json = JSON.stringify(disco);
+		let params = 'json='+json;
+		let token = this.getToken();
+		let headers_list = new HttpHeaders({
+			'Content-Type' : 'application/x-www-form-urlencoded',
+			'Authorization' : `Bearer ${token}`
+		});
+
+		return this._http.put(this.url + '/update-disco/'+id, params, {
+			headers: headers_list})
+				.pipe(map(
+					res => {
+						return res;
+					},
+					error => {
+						console.log(error);	
+					}
+				));	
+	}
+
+	deleteDisco(id: number): Observable<any>{
+		let token = this.getToken();
+		let headers_list = new HttpHeaders({
+			'Authorization' : `Bearer ${token}`
+		})	
+		return this._http.delete(this.url+'/delete-disco/'+id, {headers: headers_list})
+			.pipe(
+				map(
+					res => {
+						return res;	
+					},
+					error => {
+						console.log(<any>error);
+					}
+			))
+	}
+
+	getToken(){
+		let usuario = JSON.parse(localStorage.getItem("currentUser"));
+		if(usuario){
+			return usuario.token_auth_usuario;
+		}else{
+			return false;
+		}
 	}
 
 }

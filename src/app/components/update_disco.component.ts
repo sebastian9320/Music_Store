@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DiscoService } from '../services/disco.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 import { Disco } from '../models/disco';
 import { Genero } from '../models/genero';
@@ -18,19 +19,19 @@ export class UpdateDiscoComponent{
 	public titulo: string;
 	public disco: Disco;
 	public generos: Genero;
-	public is_update: boolean;
 	public message_error: Array<any>;
 	public form_disco: FormGroup;
-	public data;
+
+	//----------------------------------------------------------------------------//
 	constructor(
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _disco_service: DiscoService,
-		private form_builder: FormBuilder
+		private form_builder: FormBuilder,
+		private notification: MatSnackBar
 	){
 		this.titulo = "editar disco";
-		this.disco = new Disco(0,'','',1,'',new Date(),1);
-		this.is_update = true;
+		this.disco = new Disco(1,'','',1,'','',0);
 		this.message_error = [
 								{
 
@@ -40,52 +41,74 @@ export class UpdateDiscoComponent{
 							  	'album' : 'Album no valido'							  
 							  	}
 							 ];
-		
-	}
+		console.log("constructor");
 
+	}
+	//----------------------------------------------------------------------------//
+
+
+
+
+
+	//----------------------------------------------------------------------------//
+	//----------------------------------------------------------------------------//
 	ngOnInit(){
-		this.createFormDisco();
+		
 		this.getDiscoPorId();
 		this.cargarGeneros();
+		this.createFormDisco();
 	}
+	//----------------------------------------------------------------------------//
 
+
+
+	//----------------------------------------------------------------------------//
+	//----------------------------------------------------------------------------//
 	onSubmit(){
 		this.updateDisco();
 	}
+	//----------------------------------------------------------------------------//
 
+
+
+
+	//----------------------------------------------------------------------------//
+	//----------------------------------------------------------------------------//
 	createFormDisco(){
 		 	
-		 	this.form_disco = this.form_builder.group({
+		this.form_disco = this.form_builder.group({
 
 			'nombre': [ null, Validators.compose([
-												Validators.required, 
-												Validators.maxLength(25),
-												Validators.minLength(5)
-												])
-			],	
+				Validators.required, 
+				Validators.maxLength(25), 
+				Validators.minLength(5)
+			])],	
+			
 			'autor' : [ null, Validators.compose([
-												Validators.required, 
-												Validators.maxLength(20),
-												Validators.minLength(5)
-												
-												])
-			],
+				Validators.required, 
+				Validators.maxLength(20),
+				Validators.minLength(5)								
+			])],
 			
 			'genero': [ null, Validators.compose([
-												Validators.required 
-											   ])
-			],
+				Validators.required 
+		    ])],
+
 			'album': [ null ,Validators.compose([ 
-												Validators.required,
-												Validators.minLength(3)
-											   ])
-			],
+				Validators.required,
+				Validators.minLength(3)
+		   	])],
+
 			'fecha_lanzamiento' : [ null ]		
 		});
  	}
 
- 	/*********************** End Method *************************/
+ 	//----------------------------------------------------------------------------//
 
+
+
+ 	//----------------------------------------------------------------------------//
+ 	//----------------------------------------------------------------------------//
  	cargarGeneros(){
 		this._disco_service.getGeneros().subscribe(
 			result => {
@@ -103,44 +126,55 @@ export class UpdateDiscoComponent{
 			}
 		);
 	}
+	//----------------------------------------------------------------------------//
 
 
- 	//------------------------------------------------------------------------//
 
+ 	//----------------------------------------------------------------------------//
+ 	//----------------------------------------------------------------------------//
 	getDiscoPorId(){
 		this._route.params.forEach((params: Params) => {
 			let id = params['id'];
-
 			
+			
+		
 			this._disco_service.getDiscoPorId(id).subscribe(
-				response => {
-					if(response){
-						this.data = response.data;
+				res => {
 
-						
+					if(res){
+						this.disco = res.data;	
 						
 					}else{
-						this._router.navigate(['/home']);
-					}	
+						this.disco = res.data;
+					}
 				},
 				error => {
 					console.log(<any>error);
 				}
 			);
-
 		});
 		
+		
 	}
+	//----------------------------------------------------------------------------//
 
+
+
+	//----------------------------------------------------------------------------//
+	//----------------------------------------------------------------------------//
 	updateDisco(){
 		this._route.params.forEach((params: Params) => {
 			let id = params['id'];
-
+			let id_usuario = JSON.parse(localStorage.getItem("currentUser")).id_usuario;
+			this.disco.registro_usuario = id_usuario;
+			console.log(this.disco);
 			this._disco_service.updateDisco(id, this.disco).subscribe(
 				response => {
 					if(response.code == 200){
-						this._router.navigate(['/disco/'+id]);
-						
+						this._router.navigate(['/detail-disco/'+id]);
+						this.notification.open('Disco Actualizado','close', {
+  							panelClass: ['success-snackbar']
+						});
 					}else{
 						console.log(response);
 					}
@@ -151,5 +185,6 @@ export class UpdateDiscoComponent{
 			);	
 		});
 	}
+	//----------------------------------------------------------------------------//
 	
 }

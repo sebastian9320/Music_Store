@@ -10,7 +10,7 @@ body{
 	color: red;
 }
 .card-img{
-	background-image: url('./assets/images/Music-icon.png');
+	background-image: url('./assets/images/Music-icon-3.jpg');
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
@@ -22,7 +22,12 @@ body{
 	margin-bottom: 10px !important;
 }
 .success-snackbar{
+	max-width: 500px;
 	background-color: #5fba7d !important;
+}
+.warn-snackbar{
+	max-width: 500px;
+	background-color: red !important;
 }
 .mat-snack-bar-container{
 	margin-bottom: 40px !important;

@@ -1,6 +1,12 @@
-<div class="masonry-content">
-	<ngx-masonry>
-		
+	<div class="masonry-content">
+		<div class="search-container-field">
+			
+			<mat-form-field>
+				<input matInput (keyup)="searchDisco()" [(ngModel)]="searched_disco" placeholder="Buscar Disco">
+			</mat-form-field>
+			<br>	
+		</div>
+		<ngx-masonry> 
 	        <ngxMasonryItem class="masonry-item" *ngFor="let disco of discos">
 	        	
 	        	<mat-card class="example-card">
@@ -33,21 +39,25 @@
 				    
 				  </mat-card-content>
 				  <mat-card-actions>
-				  	<button mat-mini-fab color="primary">
-				    	<mat-icon>find_in_page</mat-icon>
+				  	<button mat-mini-fab color="primary" [routerLink] = "['/detail-disco',disco.id_disco]">
+				    	<mat-icon>search</mat-icon>
 				    </button>
-				    <button *ngIf="is_login" mat-mini-fab color="basic" [routerLink] = "['/update-disco',disco.id_disco]">
+				    <button *ngIf="is_logged" mat-mini-fab color="basic" [routerLink] = "['/update-disco',disco.id_disco]">
 				    	<mat-icon>edit</mat-icon>
 
 				    </button>
-				    <button *ngIf="is_login" mat-mini-fab color="warn">
+				    {{is_login}}
+				    <button *ngIf="is_logged" mat-mini-fab color="warn" (click)="showDialogDelete(disco.id_disco)">
 				    	<mat-icon>delete</mat-icon>
 				    </button>
 				  </mat-card-actions>
 				</mat-card>
 
 		    </ngxMasonryItem>
+		</ngx-masonry>
+	
+	</div>
 
-	</ngx-masonry>
 
-</div>
+  
+	  

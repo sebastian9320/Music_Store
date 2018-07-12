@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 220px;
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
 .mat-nav-list>a{
@@ -11,5 +11,6 @@
 }
 .toolbar-nav{
 	position: fixed;
-	box-shadow: 2px 3px 3px 3px #fc030333;
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2);
+
 }

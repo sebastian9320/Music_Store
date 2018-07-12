@@ -1,3 +1,12 @@
+.search-container-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.search-container-field > * {
+  width: 100%;
+}
 .ngxMasonryItem, ngxMasonryItem{
 	margin-bottom: 10px !important;
 }
@@ -24,21 +33,63 @@
 .mat-card-actions{
 	padding: 10px 10px 10px 15px !important;
 }
+.mat-card{
+	
+}
 .masonry-item{
-	margin: 0 5px 10px 5px;
+	margin: 0 5px 13px 5px;
+}
+.search-results {
+ 
 }
 
-@media screen and (min-width: 760px) {
-	.masonry-item{
+@media (min-width: 1281px) {
+  	.masonry-item{
 		width: 24%;
 	}
-
+	.card-img{
+		height: 250px;
+	}
 }
-@media screen and (min-width: 240px) and (max-width: 759px){
+
+@media (min-width: 1025px) {
+  
+ 	.masonry-item{
+		width: 24%;
+	}
+  	.card-img{
+		height: 280px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  	.masonry-item{
+		width: 23%;
+	}
+	.card-img{
+		height: 160px;
+	}
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+ 	.card-img{
+		height: 180px;
+	}	
+  	.masonry-item{
+		width: 31%;
+	}
+}
+
+@media (min-width: 280px) and (max-width: 480px) {
+  
 	.masonry-item{
 		width: 45%;
 	}
 	.card-img{
-		height: 100px;
+		height: 165px;
 	}
+  
 }

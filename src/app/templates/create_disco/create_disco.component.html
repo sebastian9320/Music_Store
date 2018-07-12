@@ -10,28 +10,21 @@
 			<div class="form-group">
 
 			  	<mat-form-field>
-			  		<input matInput name="nombre" [formControlName]="'nombre'" type="text" [(ngModel)]="disco.nombre" placeholder="Nombre" autofocus/>
+			  		<input matInput name="nombre" formControlName="nombre" type="text" [(ngModel)]="disco.nombre" placeholder="Nombre" autofocus/>
 					<mat-error *ngIf="!form_disco.controls['nombre'].valid && form_disco.controls['nombre'].touched">
 						<mat-hint align="end">{{message_error[0].nombre}}</mat-hint>	
 					</mat-error>
 				</mat-form-field>
 				
 			  	<mat-form-field>
-			  		<input matInput name="autor" type="text" [formControlName]="'autor'"[(ngModel)]="disco.autor" placeholder="autor"/>
+			  		<input matInput name="autor" type="text" formControlName ="autor"[(ngModel)]="disco.autor" placeholder="autor"/>
 			 		<mat-error *ngIf="!form_disco.controls['autor'].valid && form_disco.controls['autor'].touched">
 			 			<mat-hint align="end">{{message_error[0].autor}}</mat-hint>		 		
 			 		</mat-error>
 			  	</mat-form-field>
-				<!---
-			 	<mat-form-field>	
-			 		<input matInput name="genero" [formControlName]="'genero'" [(ngModel)]="disco.genero" placeholder="genero"/>
-			 		<mat-error *ngIf="!form_disco.controls['genero'].valid && form_disco.controls['genero'].touched">
-						<mat-hint align="end">{{message_error[0].genero}}</mat-hint>	
-			 		</mat-error>
-			 	</mat-form-field>
-				-->
+		
 				<mat-form-field>
-				  <mat-select [formControlName]="'genero'" [(ngModel)]="disco.genero" placeholder="Genero">
+				  <mat-select formControlName ="genero" [(ngModel)]="disco.genero" placeholder="Genero">
 				    <mat-option *ngFor="let genero of generos" [value]="genero.id_genero">
 				      {{genero.nombre_genero}}
 				    </mat-option>
@@ -39,7 +32,7 @@
 				</mat-form-field>
 
 				<mat-form-field>	
-			 		<input matInput name="album" [formControlName]="'album'" [(ngModel)]="disco.album" placeholder="album"/>
+			 		<input matInput name="album" formControlName ="album" [(ngModel)]="disco.album" placeholder="album"/>
 			 		<mat-error *ngIf="!form_disco.controls['album'].valid && form_disco.controls['album'].touched">
 						<mat-hint align="end">{{message_error[0].album}}</mat-hint>	
 			 		</mat-error>
@@ -47,7 +40,7 @@
 				
 
 				<mat-form-field>
-					<input matInput [matDatepicker]="picker" name="fecha_lanzamiento" [formControlName]="'fecha_lanzamiento'" [(ngModel)]="disco.fecha_lanzamiento" placeholder="Fecha de Lanzamiento">
+					<input matInput [matDatepicker]="picker" name="fecha_lanzamiento" formControlName ="fecha_lanzamiento" [(ngModel)]="disco.fecha_lanzamiento" placeholder="Fecha de Lanzamiento">
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-datepicker #picker></mat-datepicker>
 				</mat-form-field>
@@ -56,7 +49,7 @@
 			<div class="form-group">
 				<button type="submit" mat-raised-button color="primary" [disabled]="form_disco.invalid" >Guardar</button>
 			</div>  
-
+			
 		</form>
 	</mat-card-content>
 </mat-card>	
